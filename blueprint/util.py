@@ -2,6 +2,7 @@
 Utility functions.
 """
 
+import json
 import re
 import subprocess
 
@@ -70,3 +71,11 @@ def rubygems_path():
     if lsb_release_codename() is None or rubygems_update():
         return '/usr/lib/ruby/gems'
     return '/var/lib/gems'
+
+
+class JSONEncoder(json.JSONEncoder):
+
+    def default(self, o):
+        if isinstance(o, set):
+            return list(o)
+        return super(JSONEncoder, self).default(o)
