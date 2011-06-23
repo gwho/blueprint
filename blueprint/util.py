@@ -111,6 +111,14 @@ def rubygems_path():
     return '/var/lib/gems'
 
 
+class BareString(unicode):
+    """
+    Strings of this type will not be quoted when written into a Puppet
+    manifest or Chef cookbook.
+    """
+    pass
+
+
 class JSONEncoder(json.JSONEncoder):
 
     def default(self, o):
